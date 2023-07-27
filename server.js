@@ -5,6 +5,9 @@ const port = 4996
 const api = [
   {
     name: "Husky", breed:"Bull"
+  },
+  {
+    name: "Terry", breed:"Rot"
   }
 ]
 
