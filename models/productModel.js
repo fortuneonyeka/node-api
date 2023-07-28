@@ -14,7 +14,7 @@ const productSchema = mongoose.Schema(
     price: {
       type: Number,
       required: true,
-      default: $1
+     
     },
     location: {
       type: String,
@@ -30,6 +30,6 @@ const productSchema = mongoose.Schema(
   }
 )
 
-export const product = mongoose.model('product', productSchema)
+ const Product = mongoose.model('Product', productSchema);
 
-// module.export = product
+module.exports = Product;

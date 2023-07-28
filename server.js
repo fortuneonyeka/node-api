@@ -1,16 +1,11 @@
 const express = require("express")
 const app = express()
 const mongoose = require('mongoose');
+const Product = require('./models/productModel')
 const port = 4996
+app.use(express.json())
 
-const api = [
-  {
-    name: "Husky", breed:"Bull"
-  },
-  {
-    name: "Terry", breed:"Rot"
-  }
-]
+
 
 
 mongoose.set('strictQuery', false)
@@ -20,13 +15,23 @@ mongoose.connect('mongodb+srv://admin:ogubuike4996@demoapi.sdxkjvv.mongodb.net/N
   app.listen(port, () => {
     console.log(`listening at port ${port}`)
   })
-}).catch((error) => {
+}).catch((error) => { 
   console.log(`error message: ${error}`);
 })
 
+
 app.get("/", (req, res) => {
-  res.send(api)
+  res.send("hello API")
 })
-app.put("/api/:id", (req, res) => {
-  res.send(api)
+
+app.post("/product", async(req, res) => {
+ try {
+  const product = await Product.create(req.body)
+  res.status(200).json(product)
+
+ } catch (error) {
+  console.log(error.message);
+  res.status(500).json({message: error.message})
+ }
 })
+
