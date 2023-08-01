@@ -2,19 +2,22 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const Product = require("./models/productModel");
-const port = 4996;
+require('dotenv').config()
+const MONGO_URL = process.env.MONGO_URL
+const PORT = process.env.PORT
+
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 mongoose.set("strictQuery", false);
 mongoose
-  .connect(
-    "mongodb+srv://admin:ogubuike4996@demoapi.sdxkjvv.mongodb.net/Node-API?retryWrites=true&w=majority"
-  )
+  .connect(MONGO_URL)
   .then(() => {
     console.log("connected to mongoDB");
-    app.listen(port, () => {
-      console.log(`listening at port ${port}`);
+    app.listen(PORT, () => {
+      console.log(`listening at port ${PORT}`);
     });
   })
   .catch((error) => {
