@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
+
 const cors = require('cors')
 const productRoutes = require("./routes/productRoutes")
-const mongoose = require("mongoose");
 const errorMiddleware = require("./middleware/errorMiddleware");
 require('dotenv').config()
 
@@ -22,13 +23,13 @@ const FRONTEND = process.env.FRONTEND
 
 
 
-app.use(express.json());
 //Simple Usage (Enable All CORS Requests)
 app.use(cors())
 
 //defined routes
 // app.use(cors(corsOptions))
 
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(errorMiddleware)
 
@@ -50,6 +51,6 @@ mongoose
  app.use("/api/products", productRoutes)
 
   app.get("/", (req, res) => {
-    res.send("hello API");
+    res.send("Welcome to my node API. This is a practice product API");
   });
 
